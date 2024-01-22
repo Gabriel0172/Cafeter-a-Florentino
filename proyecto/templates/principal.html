@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% block content %}
+
+{% if datos and datos.es_administrador == 1 %}
+<div class="d-flex justify-content-center">
+    <h5>Vista del cliente:</h5>
+</div>
+{% endif %}
+
+<div class="d-flex flex-column align-items-center" id="productosMasFrecuentes">
+    {% if datos and datos.masFrecuentes %}
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Tus productos más comprados en la última semana:</h4>
+            <button class="close-btn" id="botonCerrar">x</button>
+        </div>
+        <div>
+            {% for dato in datos.masFrecuentes %}
+                <form class="producto seleccionar" action="" method="post">
+                    <img src="{{dato['img_ruta']}}" alt="{{dato['nombreProducto']}}" height="100px" width="100px">
+                    <div class="info_producto">
+                        <legend>{{dato['nombreProducto']}}</legend>
+                        <label>Lo has comprado {{dato['totalCantidad']}} veces en la última semana</label>
+                        <label>Precio: {{dato['precio']}} €</label>
+                        <input class="comprar" type="submit" value="Agregar al Pedido">
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<form class="col-12 d-flex flex-row align-items-center buscar" action="/busqueda" method="POST">
+    <input name="producto" class="col-3" type="text" id="buscador" placeholder="Buscar productos" list="listaProEncontrados" required>
+    <datalist id="listaProEncontrados"></datalist>
+    <button type="submit" class="btn btn-primary" id="boton_buscar">BUSCAR</button>
+</form>
+
+<div class="col-12 d-flex flex-row justify-content-center">
+    <!--INICIO DE CONTENIDO-->
+    <div class="col-10 d-flex flex-row justify-content-center contenido">  
+        <div class="row  text-center">
+            <div class="col-5 seleccionar elegir" id="link_bebidas">
+                <img src="{{ url_for('static', filename='imgs/taza_cafe.png') }}" alt="imagen de una taza de café" width="400" height="400">
+                <p>BEBIDAS</p>
+            </div>
+                
+            <div class="col-5 seleccionar elegir" id="link_aperitivos">
+                <img src="{{ url_for('static', filename='imgs/croassan.png') }}" alt="imagen de un croissant" width="400" height="400">
+                <p>APERITIVOS</p>
+            </div>
+        </div>
+    </div>
+    <!--FIN DE CONTENIDO-->
+</div>
+{% endblock content %}

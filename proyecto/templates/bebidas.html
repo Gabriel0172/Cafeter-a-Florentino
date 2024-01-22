@@ -1,0 +1,145 @@
+{% extends "index.html" %}
+{% block content %}
+
+{% if datos and datos.es_administrador == 1 %}
+<div class="d-flex justify-content-center">
+    <h5>Vista del cliente:</h5>
+</div>
+{% endif %}
+
+<form class="col-12 d-flex flex-row align-items-center buscar" action="/busqueda" method="POST">
+    <input name="producto" class="col-3" type="text" id="buscador" placeholder="Buscar productos" list="listaProEncontrados" required>
+    <datalist id="listaProEncontrados"></datalist>
+    <button type="submit" class="btn btn-primary" id="boton_buscar">BUSCAR</button>
+</form>
+
+<div class="col-12 d-flex flex-row">
+    <div class="col-1 banerIzquierdo">
+            
+    </div>
+
+    <div class="col-10 contenido">  
+
+        <div class="row">
+            <h3 style="text-align: center;">Bebidas</h3>
+
+            <div class="col-lg-6 col-md-10 col-sm-10">
+            <h4 style="text-align: center;">Café sólo:</h4>
+            {% for bebida in bebidas %}
+                {% if bebida['tipo'] == 'Sólo' %}
+                    {% if bebida['estado'] == 1 %}
+                        <form class="producto bebida seleccionar" action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}}</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                                <input class="comprar" type="submit" value="Agregar al Pedido">
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="producto bebida noSeleccionar" style="background-color:  #f1f0f0 ;" action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}} (NO DISPONIBLE)</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            <div class="col-lg-6 col-md-10 col-sm-10">
+            <h4 style="text-align: center;">Café con leche:</h4>
+            {% for bebida in bebidas %}
+                {% if bebida['tipo'] == 'Con leche' %}
+                    {% if bebida['estado'] == 1 %}
+                        <form class="producto bebida seleccionar " action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}}</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                                <input class="comprar" type="submit" value="Agregar al Pedido">
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="producto bebida noSeleccionar" style="background-color:  #f1f0f0 ;" action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}} (NO DISPONIBLE)</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            <div class="col-lg-6 col-md-10 col-sm-10">
+            <h4 style="text-align: center;">Café con alcohol:</h4>
+            {% for bebida in bebidas %}
+                {% if bebida['tipo'] == 'Con alcohol' %}
+                    {% if bebida['estado'] == 1 %}
+                        <form class="producto bebida seleccionar " action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}}</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                                <input class="comprar" type="submit" value="Agregar al Pedido">
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="producto bebida noSeleccionar" style="background-color:  #f1f0f0 ;" action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">    
+                                <legend>{{bebida['nombre']}} (NO DISPONIBLE)</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+                </div>
+
+            <div class="col-lg-6 col-md-10 col-sm-10">
+            <h4 style="text-align: center;">Café helado:</h4>
+            {% for bebida in bebidas %}
+                {% if bebida['tipo'] == 'Helado' %}
+                    {% if bebida['estado'] == 1 %}
+                        <form class="producto bebida seleccionar " action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">    
+                                <legend>{{bebida['nombre']}}</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                                <input class="comprar" type="submit" value="Agregar al Pedido">
+                            </div>
+                        </form>
+                    {% else %}
+                        <form class="producto bebida noSeleccionar" style="background-color:  #f1f0f0 ;" action="" method="post">
+                            <img src="{{bebida['img_ruta']}}" alt="{{bebida['nombre']}}">
+                            <div class="info_producto">
+                                <legend>{{bebida['nombre']}} (NO DISPONIBLE)</legend>
+                                <label style="color: #848484;padding-left: 10px; ">{{bebida['descripcion']}}</label>
+                                <label style="color: #848484;padding-left: 10px; ">Precio: {{bebida['precio']}} €</label>
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+                
+        </div>
+    </div>
+
+    <div class="col-1 banerDerecho">
+
+    </div>
+</div>
+{% endblock content %}

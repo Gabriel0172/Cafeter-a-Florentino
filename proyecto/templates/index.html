@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <script src="{{ url_for('static', filename='jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js.js') }}"></script>
+    
+    <title>Florentino</title>
+
+    <!-- Evitar error favicon -->
+    <link rel="shortcut icon" href="#" />
+</head>
+<body>
+    <header class="d-flex flex-column superior">
+        {% if datos %}
+        <div class="d-flex flex-row justify-content-end">
+            <ul class="nav">
+                <li><a class="d-flex flex-row" href="{{ url_for('perfil') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 21C4 17.134 7.13401 14 11 14C11.3395 14 11.6734 14.0242 12 14.0709M15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7ZM12.5898 21L14.6148 20.595C14.7914 20.5597 14.8797 20.542 14.962 20.5097C15.0351 20.4811 15.1045 20.4439 15.1689 20.399C15.2414 20.3484 15.3051 20.2848 15.4324 20.1574L19.5898 16C20.1421 15.4477 20.1421 14.5523 19.5898 14C19.0376 13.4477 18.1421 13.4477 17.5898 14L13.4324 18.1574C13.3051 18.2848 13.2414 18.3484 13.1908 18.421C13.1459 18.4853 13.1088 18.5548 13.0801 18.6279C13.0478 18.7102 13.0302 18.7985 12.9948 18.975L12.5898 21Z" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p>{{datos.nombre}}</p>
+                </a>
+                    <ul id="enlaces">
+                        <li><a href="#" name="cerrarSesion">Cerrar sesión</a></li>
+                        <li><a href="{{ url_for('formulario_Modificar') }}">Modificar usuario</a></li>
+                        <li><a href="{{ url_for('formulario_Eliminar') }}">Dar de baja</a></li>
+                        {% if datos.es_administrador == 1 %}
+                            <li><a href="{{ url_for('admin_principal') }}">Área de administración</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+    
+            <a href="{{ url_for('carrito_Compra') }}" class="d-flex flex-row align-items-center carrito">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24" fill="none">
+                    <g id="Interface / Shopping_Cart_01">
+                        <path id="Vector" d="M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM17 17H9.29395C8.83288 17 8.60193 17 8.41211 16.918C8.24466 16.8456 8.09938 16.7291 7.99354 16.5805C7.8749 16.414 7.82719 16.1913 7.73274 15.7505L5.27148 4.26465C5.17484 3.81363 5.12587 3.58838 5.00586 3.41992C4.90002 3.27135 4.75477 3.15441 4.58732 3.08205C4.39746 3 4.16779 3 3.70653 3H3M6 6H18.8732C19.595 6 19.9555 6 20.1978 6.15036C20.41 6.28206 20.5653 6.48862 20.633 6.729C20.7104 7.00343 20.611 7.34996 20.411 8.04346L19.0264 12.8435C18.9068 13.2581 18.8469 13.465 18.7256 13.6189C18.6185 13.7547 18.4772 13.861 18.317 13.9263C18.1361 14 17.9211 14 17.4921 14H7.73047M8 21C6.89543 21 6 20.1046 6 19C6 17.8954 6.89543 17 8 17C9.10457 17 10 17.8954 10 19C10 20.1046 9.10457 21 8 21Z" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                </svg>
+                <div class="circulo">
+                    <p class="textoCirculo"></p>
+                </div>
+            </a>
+        </div>
+        {% else %}
+            <div id="botones" class="d-flex justify-content-end align-items-center">   
+                <a href="{{ url_for('formulario_InicioSesion') }}"><button type="button" class="btn btn-light">Inicio Sesión</button></a>
+                <a href="{{ url_for('formulario_Registro') }}"><button type="button" class="btn btn-dark">Únete Ahora</button></a>
+                    <a href="{{ url_for('carrito_Compra') }}" class="d-flex flex-row align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24" fill="none">
+                            <g id="Interface / Shopping_Cart_01">
+                            <path id="Vector" d="M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM17 17H9.29395C8.83288 17 8.60193 17 8.41211 16.918C8.24466 16.8456 8.09938 16.7291 7.99354 16.5805C7.8749 16.414 7.82719 16.1913 7.73274 15.7505L5.27148 4.26465C5.17484 3.81363 5.12587 3.58838 5.00586 3.41992C4.90002 3.27135 4.75477 3.15441 4.58732 3.08205C4.39746 3 4.16779 3 3.70653 3H3M6 6H18.8732C19.595 6 19.9555 6 20.1978 6.15036C20.41 6.28206 20.5653 6.48862 20.633 6.729C20.7104 7.00343 20.611 7.34996 20.411 8.04346L19.0264 12.8435C18.9068 13.2581 18.8469 13.465 18.7256 13.6189C18.6185 13.7547 18.4772 13.861 18.317 13.9263C18.1361 14 17.9211 14 17.4921 14H7.73047M8 21C6.89543 21 6 20.1046 6 19C6 17.8954 6.89543 17 8 17C9.10457 17 10 17.8954 10 19C10 20.1046 9.10457 21 8 21Z" stroke="#d7d7d7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                        <div class="circulo">
+                            <p class="textoCirculo"></p>
+                        </div>
+                    </a>
+            </div>
+        {% endif %}
+        <div id="link_logo" class="d-flex justify-content-center" >
+            <img src="{{ url_for('static', filename='imgs/logo2.png') }}" alt="logo">
+        </div>
+    </header>
+
+    <div id="mostrar_alerta">
+        <p id="mensaje_alerta"></p>
+        <div id="botones_alerta">
+        <button id="cerrar_alerta">Cerrar</button>
+        <button id="eliminar_producto">Si</button>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="info-footer">
+            <h2>Contacto</h2>
+            <p>Dirección: Calle Flores #45</p>
+            <p>Teléfono: (555) 123-4567</p>
+            <p>Correo Electrónico: cafeteriaflorentino@gmail.com</p>
+        </div>
+    
+        <div class="redes-sociales">
+            <h2>Síguenos en Redes Sociales</h2>
+            <ul>
+                <li><a href="https://www.facebook.com/" target="_blank"><img src="{{ url_for('static', filename='imgs/social-icon/facebook.png') }}" alt="facebook"></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><img src="{{ url_for('static', filename='imgs/social-icon/instagram.png')}}" alt="instagram"></a></li>
+                <li><a href="https://twitter.com/" target="_blank"><img src="{{ url_for('static', filename='imgs/social-icon/facebook.png') }}" alt="twitter"></a></li>
+            </ul>
+        </div>
+    
+        <p class="derechos">&copy; 2023 Cafetería Florentino. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

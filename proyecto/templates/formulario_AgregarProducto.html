@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center my-4">
+            <h3 id="demo">Agregar producto</h3>
+        </div>
+        <div class="col-12 d-flex justify-content-center my-4">
+            <form class="col-lg-3 col-md-3 col-sm-3" action="" method="post" id="formularioAgregarProducto">
+                <div class="form-group">
+                    <label for="tipoProducto1">Seleccione un tipo de producto:</label>
+                    <select class="form-control" id="tipoProducto1">
+                        <option></option>
+                        {% for nombreProducto in nombreProductos%}
+                        <option value="{{nombreProducto['Tables_in_florentino']}}">{{nombreProducto['Tables_in_florentino']}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nombreProducto">Nombre del producto:</label>
+                    <input type="text" id="nombreProducto" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcionProducto">Descripción del producto:</label>
+                    <textarea type="text" id="descripcionProducto" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <select class="form-control" id="estado">
+                        <option></option>
+                        <option value="1">Disponible</option>
+                        <option value="0">No Disponible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="text" id="precio" pattern="[0-9]+(\.[0-9]+)?" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="imagen">Seleccionar imagen:</label>
+                    <input type="file" id="imagen" accept="image/*" required>
+                </div>
+                <div class="form-group">
+
+                    <div id="categoria1">
+                        <label for="tipoAperitivo">Seleccione el tipo de aperitivo:</label>
+                        <select class="form-control" id="categoria1" name="tipoAperitivo">
+                            <option></option>
+                            <option value="Salado">Salado</option>
+                            <option value="Dulce">Dulce</option>
+                        </select>
+                    </div>
+
+                    <div id="categoria2">
+                        <label for="tipoBebida">Seleccione el tipo de bebida:</label>
+                        <select class="form-control" id="categoria2" name="tipoBebida">
+                            <option></option>
+                            <option value="Sólo">Sólo</option>
+                            <option value="Con leche">Con leche</option>
+                            <option value="Con alcohol">Con alcohol</option>
+                            <option value="Helado">Helado</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="text-center mt-4">
+                    <input id="atras2" type="button" value="Atrás" class="btn btn-secondary atras2">
+                    <input id="enviar" type="submit" value="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div class="col-12 d-flex justify-content-center my-4">
+            <p id="mensaje"></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

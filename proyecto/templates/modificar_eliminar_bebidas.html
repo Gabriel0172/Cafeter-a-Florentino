@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="col-12 enlaces">
+        <a href="" id="atras2" >Atrás</a>
+    </div>
+
+    <div class="col-12 d-flex flex-row">
+        <div class="col-1 banerIzquierdo">
+            
+        </div>
+   
+        <!--INICIO DE CONTENIDO-->
+        <div class="col-10 d-flex justify-content-around contenido_admin">
+            <div class="contenido_producto">
+                {% for bebida in bebidas %}
+                    <div class="bebida_aperitivo">
+                        <h5>{{ bebida.nombre }}</h5>
+                        <img src="{{ bebida.img_ruta }}" alt="{{ bebida.nombre }}">
+                        <div>
+                            <button class="eliminar" data-id="{{ bebida.id }}" data-producto="bebida">Eliminar</button>
+                            <button class="modificar_bebida modificar" data-id="{{ bebida.id }}">Modificar</button>
+                        </div>
+                    </div>
+                    <dialog class="dialog" id="{{ bebida.id }}">
+                        <div>
+                            <p>Nombre</p>
+                            <input type="text" value="{{ bebida.nombre }}" class="editable_bebidas{{ bebida.id }} editable" data-id="{{ bebida.id }}" data-field="nombre" data-original-value="{{ bebida.nombre }}">
+                            <p>Descripción</p>
+                            <textarea class="editable_bebidas{{ bebida.id }} editable" data-id="{{ bebida.id }}" data-field="descripcion" data-original-value="{{ bebida.descripcion }}" cols="30" rows="5">{{ bebida.descripcion }}</textarea>
+                            <p>Estado</p>
+                            <select class="editable_bebidas{{ bebida.id }} editable" data-id="{{ bebida.id }}" data-field="estado" data-original-value="{{ bebida.estado }}">
+                                <option value="1" {% if bebida.estado == 1 %}selected{% endif %}>Disponible</option>
+                                <option value="0" {% if bebida.estado == 0 %}selected{% endif %}>No Disponible</option>
+                            </select>
+                            <p>Tipo</p>
+                            <input type="text" value="{{ bebida.tipo }}" class="editable_bebidas{{ bebida.id }} editable" data-id="{{ bebida.id }}" data-field="tipo" data-original-value="{{ bebida.tipo }}">
+                            <p>Precio</p>
+                            <input type="number" step="0.01" value="{{ bebida.precio }}" class="editable_bebidas{{ bebida.id }} editable" data-id="{{ bebida.id }}" data-field="precio" data-original-value="{{ bebida.precio }}">
+                        </div>
+                        <div>
+                            <button class="cerrar_dialog_bebida cerrar" data-id="{{ bebida.id }}">Cerrar</button>
+                            <button type="button" id="guardar_cambios_bebidas{{ bebida.id }}" class="guardar" disabled>Guardar Cambios</button>
+                        </div>
+                    </dialog>
+                        
+                {% endfor %}
+            </div>
+            
+        </div>
+        <!--FIN DE CONTENIDO-->
+        
+        
+        
+        <div class="col-1 banerDerecho">
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

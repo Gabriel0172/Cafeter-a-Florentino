@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="col-12 enlaces">
+        <a href="" id="atras2">Atrás</a>
+    </div>
+
+    <div class="col-12 d-flex flex-row">
+        <div class="col-1 banerIzquierdo">
+            
+        </div>
+   
+        <!--INICIO DE CONTENIDO-->
+        <div class="col-10 d-flex justify-content-around contenido_admin">
+            <div class="contenido_producto">
+                {% for aperitivo in aperitivos %}
+                    <div class="bebida_aperitivo">
+                        <h5>{{ aperitivo.nombre }}</h5>
+                        <img src="{{ aperitivo.img_ruta }}" alt="{{ aperitivo.nombre }}">
+                        <div>
+                            <button class="eliminar" data-id="{{ aperitivo.id }}" data-producto="aperitivo">Eliminar</button>
+                            <button class="modificar_aperitivo modificar" data-id="{{ aperitivo.id }}">Modificar</button>
+                        </div>
+                    </div>
+                    <dialog class="dialog" id="{{ aperitivo.id }}">
+                        <div>
+                            <p>Nombre</p>
+                            <input type="text" value="{{ aperitivo.nombre }}" class="editable_aperitivos{{ aperitivo.id }} editable" data-id="{{ aperitivo.id }}" data-field="nombre" data-original-value="{{ aperitivo.nombre }}">
+                            <p>Descripción</p>
+                            <textarea class="editable_aperitivos{{ aperitivo.id }} editable" data-id="{{ aperitivo.id }}" data-field="descripcion" data-original-value="{{ aperitivo.descripcion }}" cols="30" rows="5">{{ aperitivo.descripcion }}</textarea>
+                            <p>Estado</p>
+                            <select class="editable_aperitivos{{ aperitivo.id }} editable" data-id="{{ aperitivo.id }}" data-field="estado" data-original-value="{{ aperitivo.estado }}">
+                                <option value="1" {% if aperitivo.estado == 1 %}selected{% endif %}>Disponible</option>
+                                <option value="0" {% if aperitivo.estado == 0 %}selected{% endif %}>No Disponible</option>
+                            </select>
+                            <p>Tipo</p>
+                            <input type="text" value="{{ aperitivo.tipo }}" class="editable_aperitivos{{ aperitivo.id }} editable" data-id="{{ aperitivo.id }}" data-field="tipo" data-original-value="{{ aperitivo.tipo }}">
+                            <p>Precio</p>
+                            <input type="number" step="0.01" value="{{ aperitivo.precio }}" class="editable_aperitivos{{ aperitivo.id }} editable" data-id="{{ aperitivo.id }}" data-field="precio" data-original-value="{{ aperitivo.precio }}">
+                        </div>
+                        <div>
+                            <button class="cerrar_dialog_aperitivo cerrar" data-id="{{ aperitivo.id }}">Cerrar</button>
+                            <button type="button" id="guardar_cambios_aperitivos{{ aperitivo.id }}" class="guardar" disabled>Guardar Cambios</button>
+                        </div>
+                    </dialog>
+                {% endfor %}
+
+            </div>
+            
+        </div>
+        <!--FIN DE CONTENIDO-->
+
+
+        <div class="col-1 banerDerecho">
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

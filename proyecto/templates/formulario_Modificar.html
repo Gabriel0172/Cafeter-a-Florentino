@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center my-4">
+            <h3 id="demo">Modificar datos</h3>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <form action="" method="post" name="formularioModificar">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" value="{{datos.nombre}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" class="form-control" value="{{datos.apellidos}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" value="{{datos.email}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha nacimiento:</label>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="{{datos.fecha_nacimiento}}" required min="1907-03-04">
+                </div>
+                <div class="text-center mt-4">
+                    <input id="atras" type="button" value="Atrás" class="btn btn-secondary">
+                    <input id="enviar" type="submit" value="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div class="col-12 d-flex justify-content-center my-4">
+            <p id="mensaje"></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

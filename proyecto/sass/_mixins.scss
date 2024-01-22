@@ -1,0 +1,114 @@
+@use 'variables' as var;
+@mixin tamanio-btn-compra{
+  width: 149px;
+  height: 50px;
+}
+@mixin tamanio-btn-admin{
+  width: 200px;
+  height: 200px;
+}
+
+@mixin tamanio-imagen-producto{
+  width: 160px;
+  height: 100%;
+}
+@mixin tamanio-imagen-producto-admin{
+  width: 160px;
+  height: 150px;
+}
+@mixin tamanio-campo-producto-admin{
+  width: 240px;
+  height: 360px;
+}
+@mixin tamanio-imagen-compra{
+  width: 95px;
+  height: 95px;
+}
+@mixin tamanio-imagen-social{
+  width: 35px;
+  height: 35px;
+}
+@mixin tamanio-footer{
+  width: 100%;
+  height: 250px;
+}
+@mixin boton-cafeteria{
+  height: 47px;
+  border: 1px solid rgb(171, 171, 171);
+  border-collapse: collapse;
+  background-color: var.$btn-buscar;
+  transition: background-color 0.3s
+}
+@mixin boton-cafeteria-hover{
+  background-color: var.$btn-buscar-hover;
+}
+@mixin boton-cancelar{
+  background-color: var.$btn-compra;
+  color: var.$btn-compra-hover;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 10px; 
+  text-align: center;
+}
+@mixin boton-cancelar-hover{
+  background-color: var.$btn-compra-hover;
+  color:var.$btn-compra;
+  border: 1px solid var.$borde-btn;
+}
+@mixin animacion{
+  transition: transform 0.4s;
+  transform: scale(1.1);
+  background: var.$fondo-animacion;
+  border-radius: 10px;
+}
+@mixin boton-eliminar{
+  color: var.$color-text-modificar;
+  width: auto;
+  height: 40px;
+  border: 1px solid var.$borde-btn;
+  border-radius: 10px;
+  background-color: var.$btn-eliminar;
+  transition: background-color 0.3s
+}
+@mixin boton-eliminar-hover{
+  background-color: var.$btn-eliminar-hover;
+}
+@mixin boton-modificar{
+  color: var.$color-text-modificar;
+  width: auto;
+  height: 40px;
+  border: 1px solid var.$borde-btn;
+  border-radius: 10px;
+  background-color: var.$btn-modificar;
+  transition: background-color 0.3s
+}
+@mixin boton-modificar-hover{
+  background-color: var.$btn-modificar-hover;
+}
+@mixin boton-cerrar{
+  color: var.$color-text-modificar;
+  width: auto;
+  height: 40px;
+  border: 1px solid var.$borde-btn;
+  border-radius: 10px;
+  background-color: var.$btn-alert-cerrar;
+  transition: background-color 0.3s
+}
+@mixin boton-cerrar-hover{
+  background-color: var.$btn-alert-cerrar-hover;
+}
+@mixin boton-guardar{
+  color: var.$color-text-modificar;
+  width: auto;
+  height: 40px;
+  border: 1px solid var.$borde-btn;
+  border-radius: 10px;
+  background-color: var.$btn-guardar;
+  transition: background-color 0.3s
+}
+@mixin boton-guardar-hover{
+  background-color: var.$btn-guardar-hover;
+}

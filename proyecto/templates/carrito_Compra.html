@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center my-4">
+            <h3 id="demo">Carrito compra</h3>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            {% if datos %}
+                {% if datos['carrito'] %}
+                    <form action="" method="post">
+                        {% for dato in datos['carrito'] %}
+                            <div class="d-flex flex-row lista-compra">
+                                <img src="{{ dato['rutaImg'] }}" alt="{{ dato['nombreProducto'] }}" width="100" height="100">
+                                <input id="nombreProducto" type="text" value="{{ dato['nombreProducto'] }}" class="form-control" readonly>
+                                <input id="precioProducto" type="text"value="{{ dato['precioTotalProducto'] }} €" class="form-control" readonly>
+                                <input class="cantidad" type="number" min="0" max="20" value="{{ dato['cantidad'] }}" class="form-control">
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex flex-row justify-content-center align-items-center">
+                            <p>Precio total:</p><p id="precioTotal" style="color: #3b5359; font-size: 1.5rem; margin-left: 0.5rem;"></p>
+                        </div>
+                        <div class="text-center mt-4">
+                            <input id="atras" type="button" value="Atrás" class="btn btn-secondary">
+                            <input id="finalizarCompra" type="submit" value="Finalizar compra" class="btn btn-primary">
+                        </div>
+                    </form>
+                    <!-------------------------------------------------------------------------------------------------------------------->
+                    <!-------------------------------------------------------------------------------------------------------------------->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+                    <script>
+                        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+                        socket.on('connect', function() {
+                            console.log('Conectado al servidor');
+                        });
+
+                        socket.on('respuesta_del_servidor', function(data) {
+                            console.log('Respuesta del servidor: '+ data);
+                            if(data != 'admin')
+                                $('form').append(`<p>Su pedido estará dentro de ${data}<p>`)
+                        });
+
+                        $('#finalizarCompra').on('click',function(){
+                            var user_sid = socket.id;
+                            
+
+                            // Enviar un objeto JSON al servidor
+                            var json_data = {
+                                user_sid: user_sid,
+                                
+                            };
+
+                            socket.emit('mensaje_del_cliente', json_data);
+                        })
+                    </script>
+                    <!-------------------------------------------------------------------------------------------------------------------->
+                    <!-------------------------------------------------------------------------------------------------------------------->
+                {% else %}
+                        <div class="d-flex flex-column align-items-center">
+                            <p id="mensaje">No ha seleccionado ningún producto.</p>
+                            <a href="{{ url_for('index') }}"><button type="button" class="btn btn-light pag-principal">Página principal</button></a>
+                        </div>
+                {% endif %}
+            {% else %}
+                <div class="d-flex flex-column align-items-center">
+                    <p id="mensaje">Inicie sesión para añadir productos al carrito.</p>
+                    <a href="{{ url_for('formulario_InicioSesion') }}"><button type="button" class="btn btn-light">Inicio Sesión</button></a>
+                    <input id="atras" type="button" value="Atrás" class="btn btn-dark">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

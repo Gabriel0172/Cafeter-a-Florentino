@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="col-12 d-flex flex-row">
+        <div class="col-1 banerIzquierdo">
+            
+        </div>
+   
+        <!--INICIO DE CONTENIDO-->
+        <div class="col-10 d-flex justify-content-around contenido_admin">
+            
+            <a href="{{ url_for('formulario_AgregarProducto')}} "><button type="button" class="btn btn-outline-info boton_admin">Agregar Producto</button></a>
+            <a href="/modificar_eliminar_bebidas"><button type="button" class="btn btn-outline-info boton_admin" id="modificar_bebida">Modificar/Eliminar Bebida</button></a>
+            <a href="/modificar_eliminar_aperitivos"><button type="button" class="btn btn-outline-info boton_admin" id="modificar_aperitivo" >Modificar/Eliminar Aperitivo</button></a>
+            <a href="/vista_pedido_admin"><button type="button" class="btn btn-outline-info boton_admin" id="modificar_aperitivo" >Pedidos</button></a>
+        </div>
+        <!--FIN DE CONTENIDO-->
+
+
+
+        <div class="col-1 banerDerecho">
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

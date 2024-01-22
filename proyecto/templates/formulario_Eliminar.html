@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center my-4">
+            <h3 id="demo">Dar de baja</h3>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <form action="" method="post" name="formularioEliminar">
+                <div class="form-group">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseña" name="contraseña" class="form-control" required>
+                </div>
+                <div class="text-center mt-4">
+                    <input id="atras" type="button" value="Atrás" class="btn btn-secondary">
+                    <input id="enviar" type="submit" value="Enviar" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+        <div class="col-12 d-flex justify-content-center my-4">
+            <p id="mensaje">Escriba su contraseña y su usuario será eliminado.</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

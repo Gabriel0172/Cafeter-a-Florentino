@@ -1,0 +1,89 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="col-12 enlaces">
+        <a href="" id="atras2" >Atrás</a>
+    </div>
+
+    <div class="col-12 d-flex flex-row">
+        <div class="col-1 banerIzquierdo">
+            
+        </div>
+   
+        <!--INICIO DE CONTENIDO-->
+        <div class="col-10 d-flex flex-wrap justify-content-around">
+
+            {% for usuario,productos in pedidos.items() %}
+                <div class="col-4" style="margin-top: 10px;">
+                    <p>{{usuario}} || <span class="{{pedidos[usuario][0]['id']}}" style="color:green">Pendiente</span></p>
+                    <p>ID: {{pedidos[usuario][0]['id']}}</p>
+                    <!-- <button type="button" class="btn btn-info modificar_bebida modificar" data-id="{{pedidos[usuario][0]['id']}}">Info. Pedido</button> -->
+                    <button class="modificar_bebida modificar" data-id="{{ pedidos[usuario][0]['id'] }}">Info. Pedido</button>
+                    <button type="button" class="btn btn-success entregado" data-id="{{pedidos[usuario][0]['id']}}">Entregado</button>
+                    <button type="button" class="btn btn-danger cancelar" data-id="{{pedidos[usuario][0]['id']}}">Cancelar</button>
+
+
+                    <dialog class="dialog text-center" id="{{pedidos[usuario][0]['id']}}">
+                        <div>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    
+                                    <th scope="col">Proucto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio Unidad</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in productos %}
+                                        <tr>
+                                            <td>{{product['nombreProducto']}}</td>
+                                            <td>{{product['cantidad']}}</td>
+                                            <td>{{product['precio']}}€</td>
+                                        </tr> 
+                                    {% endfor %}
+                                  
+                                </tbody>
+                              </table>
+                        </div>
+                        <div>
+                            <button class="cerrar_dialog_bebida cerrar" data-id="{{pedidos[usuario][0]['id']}}">Cerrar</button>
+                        </div>
+                    </dialog>
+
+                </div>
+            {% endfor %}
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+                        <script>
+                            var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+                            socket.on('connect', function() {
+                                console.log('Conectado al servidor');
+                            });
+
+                            socket.on('respuesta_del_servidor', function(data) {
+                                console.log('Respuesta del servidor: ');
+                                if(data == 'admin')
+                                    location.reload();
+                            });
+
+
+                        </script>
+                        <!-------------------------------------------------------------------------------------------------------------------->
+                        <!-------------------------------------------------------------------------------------------------------------------->
+            
+        </div>
+        <!--FIN DE CONTENIDO-->
+
+
+
+        <div class="col-1 banerDerecho">
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}
